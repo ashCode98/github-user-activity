@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 async function githubUserActivity(username) {
     let userData;
     const url = `https://api.github.com/users/${username}/events`;
@@ -40,5 +41,8 @@ async function githubUserActivity(username) {
     }
 }
 
-let username = "kamranahmedse";
-githubUserActivity(username);
+const args = process.argv.slice(1);
+args[0] = "github-activity";
+const username = args[1];
+
+!username ? console.error("404, user not found") : githubUserActivity(username);
